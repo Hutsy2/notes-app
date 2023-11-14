@@ -10,20 +10,27 @@ class MainViewModel : ViewModel() {
     fun addNote(
         note: Note,
     ) {
-        if (notes.contains(note)) {
+        var existingNote: Note? = null
+        val noteExists = notes.any {
+            existingNote = it
+            it.id == note.id
+        }
+        if (noteExists) {
             // Just a simple logic for updating the notes
-            notes.remove(note)
+            notes.remove(existingNote)
             notes.add(note)
         } else {
             notes.add(note)
         }
     }
+
     fun deleteNote(
         note: Note,
     ) {
         notes.remove(note)
     }
 }
+
 data class Note(
     val id: UUID = UUID.randomUUID(),
     val title: String,
