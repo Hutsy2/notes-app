@@ -1,6 +1,7 @@
 package com.hutsy.group.notes.ui
 
 import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
 import java.util.UUID
 
@@ -35,4 +36,6 @@ data class Note(
     val id: UUID = UUID.randomUUID(),
     val title: String,
     val description: String? = null,
+    val color: Color
 )
+
