@@ -9,46 +9,67 @@ import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardColors
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.hutsy.group.notes.ui.theme.NotesTheme
 
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ItemDisplay(
     modifier: Modifier = Modifier,
+    onCardClick: () -> Unit,
     note: Note,
-
-    ) {
+) {
     Card(
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
         modifier = modifier
             .fillMaxWidth()
             .padding(horizontal = 4.dp, vertical = 2.dp)
             .sizeIn(minHeight = 80.dp),
-        colors = CardDefaults.cardColors(note.color)
+        colors = CardDefaults.cardColors(
+            note.color
+        ),
+        onClick = onCardClick
     )
     {
+
         Column(
             modifier = Modifier.padding(8.dp)
         ) {
             Text(
                 text = note.title,
-                style =MaterialTheme.typography.displayMedium
+                style = MaterialTheme.typography.displayMedium,
+                modifier = Modifier.padding(bottom = 8.dp)
+
             )
+            note.description?.let {
+                Text(
+                    text = it,
+                    maxLines = 1,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    overflow = TextOverflow.Ellipsis,
+                    style = MaterialTheme.typography.bodyMedium
+
+                )
+            }
         }
 
     }
 }
 
-@Preview
-@Composable
-fun ItemDisplayPreview() {
-    NotesTheme {
-        ItemDisplay(note = NotesRepository.dummyData[3])
-    }
-}
+//@Preview
+//@Composable
+//fun ItemDisplayPreview() {
+//    NotesTheme {
+//        ItemDisplay(note = NotesRepository.dummyData[3], onCardClick = true, selected = false)
+//    }
+//}

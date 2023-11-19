@@ -7,6 +7,7 @@ import java.util.UUID
 
 class MainViewModel : ViewModel() {
     val notes = mutableStateListOf<Note>()
+    val Data = mutableStateListOf<NotesRepository>()
 
     fun addNote(
         note: Note,

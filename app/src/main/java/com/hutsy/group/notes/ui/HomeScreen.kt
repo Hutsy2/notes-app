@@ -62,7 +62,8 @@ fun HomeScreen(
                                 ),
                                 initialOffsetY = { it * (index + 1) } // staggered entrance
                             )
-                        )
+                        ),
+                    onCardClick = {},
                 )
             }
         }
